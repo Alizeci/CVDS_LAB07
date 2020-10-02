@@ -12,7 +12,14 @@
     <result property='direccion' column='direccion' />
     <result property='email' column='email' />
     <result property='vetado' column='vetado' />
-    <collection property='rentados' ofType='ItemRentado' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemRentadoResult' columnPrefix='ir_'></collection>
+    <collection property='rentados' ofType='ItemRentado' resultMap='ItemRentadoResult' columnPrefix='ir_'></collection>
+  </resultMap>
+
+  <resultMap type='ItemRentado' id='ItemRentadoResult'>
+    <id property='id' column='id' />
+    <result property='fechainiciorenta' column='fechainiciorenta' />
+    <result property='fechafinrenta' column='fechafinrenta' />
+    <association property="items" javaType="Item" resultMap= 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult' columnPrefix = 'i_'></association>
   </resultMap>
 
   <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
@@ -71,7 +78,7 @@
       left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
       left join VI_ITEMS as i on ir.ITEMS_id=i.id 
       left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
-    <if test="ClienteDocumento !=null">
+    <if test="idcli !=null">
         WHERE c.documento = #{idcli}
     </if>
   </select>

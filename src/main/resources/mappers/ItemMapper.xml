@@ -15,13 +15,6 @@
     <result property='genero' column='genero' />
     <association property="tipo" javaType="TipoItem" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult' columnPrefix = 'ti_'></association>
   </resultMap>
-    
-  <resultMap type='ItemRentado' id='ItemRentadoResult'>
-    <id property='id' column='id' />
-    <result property='fechainiciorenta' column='fechainiciorenta' />
-    <result property='fechafinrenta' column='fechafinrenta' />
-    <association property="items" javaType="Item" resultMap= 'ItemResult' columnPrefix = 'i_'></association>
-  </resultMap>
 
   <select parameterType="map" id="consultarItems" resultMap="ItemResult">
     SELECT 
